@@ -49,7 +49,7 @@ exports.update = (req, res)=>{
         .status(400)
         .send({message:"Data to update cant not by empty!"})
     }
-    // const code = req.params.code;
+    
     const code = req.params.code;
     const dataTochange = req.body.reason;
 
@@ -69,11 +69,12 @@ exports.update = (req, res)=>{
 
 // delete a cuellobotella especified by id
 exports.delete=(req, res)=>{
-    const mycode = req.params.code;
-    CuelloBotellaDb.findByIdAndDelete(mycode)
+    const code = req.params.code;
+
+    CuelloBotellaDb.findByIdAndDelete({code: code})
     .then(data=>{
         if(!data){
-            res.status(404).send({message:`Can't delete report with code ${mycode}. Maybe the code is wrong!`})
+            res.status(404).send({message:`Can't delete report with code ${code}. Maybe the code is wrong!`})
         } else{
             res.send({
                 message:"Report was delete successfully!"
@@ -82,7 +83,7 @@ exports.delete=(req, res)=>{
     })
     .catch(err=>{
         res.status(500).send({
-            message:"Could't delete report with id=" + mycode + " and "+ err
+            message:"Could't delete report with id=" + code + " and "+ err
         })
     });
 }
