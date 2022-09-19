@@ -1,0 +1,43 @@
+
+<!-- include header-->
+<%- include('include/_header')%>
+<!-- /include header-->
+
+    <!--Main site-->
+    <main id="site-main">
+        <div class="container">
+            <div class="box-nav d-flex justify-between">
+                <a href="/add-cuellobotella" class="border-shadow">
+                    <span class="text-gradient">Nuevo Reporte Cuello Botella<i class="fa-solid fa-pen-to-square"></i>
+                    </span>
+                </a>
+            </div>
+            <!--Form handling-->
+            <form action="/" method="POST">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Id</th>
+                            <th>Fecha</th>
+                            <th>Dni Encargado</th>
+                            <th>Motivo</th>
+                            <th>Lote</th>
+                            <th>Sección</th>
+                            <th>Hora Inicio</th>
+                            <th>Hora Final</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%- include('include/_show')%>
+                    </tbody>
+                </table>
+            </form>
+            <!--/Form handling-->
+        </div>
+    </main>
+    <!--/Main site-->
+
+<!-- include footer-->
+<%- include('include/_footer')%>
+<!-- /include footer-->
