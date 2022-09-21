@@ -18,7 +18,7 @@ a{
 }
 
 .container{
-    max-width: 1024px;
+    max-width: 1300px;
     margin: auto;
 }
 
@@ -58,6 +58,7 @@ a{
 }
 
 .text-gradient{
+    text-align: left;
     background: linear-gradient(to right, #8e2de2, #4a00e0);
     -webkit-background-clip: text;
     background-clip: text;
@@ -65,7 +66,7 @@ a{
 }
 
 #header nav{
-    background-color: #06d6a0;
+    background-color: #20c67a;
     padding: 1em 0;
     width: 100%;
 }
@@ -103,7 +104,7 @@ table{
 }
 
 .table tr:hover{
-    background-color: darkturquoise;
+    background-color: #a0fb0e;
 }
 
 .table tr:hover td > a{
@@ -151,14 +152,14 @@ table{
     margin: auto;
 }
 
-#update_cuellobotella .form-group,
-#add_cuellobotella .form-group{
+#update_bottleneck .form-group,
+#add_bottleneck .form-group{
     margin: .4em 0;
 }
 
-#add_cuellobotella .form-group input[type="text"], 
+#add_bottleneck .form-group input[type="text"], 
 input[type="number"], input[type="time"], input[type="date"],
-#update_cuellobotella .form-group input[type="text"], 
+#update_bottleneck .form-group input[type="text"], 
 input[type="number"], input[type="time"], input[type="date"]{
     width: 100%;
     padding: .6em 1em;
@@ -169,11 +170,11 @@ input[type="number"], input[type="time"], input[type="date"]{
     border-radius: .2em ;
 }
 
-#update_cuellobotella .form-group .btn,
-#add_cuellobotella .form-group .btn{
+#update_bottleneck .form-group .btn,
+#add_bottleneck .form-group .btn{
     width: 100%;
     padding: .9em 1em;
-    background-color: #06d6a0;
+    background-color: #20c67a;
     border: none;
     font-family: 'PT Sans', sans-serif;
     font-size: 1em;
@@ -181,8 +182,8 @@ input[type="number"], input[type="time"], input[type="date"]{
     border-radius: .5em 0;
 }
 
-#update_cuellobotella .form-group .btn:hover,
-#add_cuellobotella .form-group .btn:hover{
+#update_bottleneck .form-group .btn:hover,
+#add_bottleneck .form-group .btn:hover{
     background-color: var(--dark);
     color: var(--border);
 }

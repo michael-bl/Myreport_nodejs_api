@@ -10,7 +10,7 @@ var schema = new mongoose.Schema({
         type:String,
         required:true
     },
-    dniEncargado: {
+    dniManager: {
         type:String,
         required:true
     },
@@ -32,6 +32,6 @@ var schema = new mongoose.Schema({
 });
 
 // al nombre indicado aqui para la coleccion, agregar s al final sino mongodb lo hara por nosotros
-const CuelloBotellaDb = mongoose.model('cuellosbotellas', schema);
+const BottleneckDb = mongoose.model('bottlenecks', schema);
 
-module.exports = CuelloBotellaDb;
+module.exports = BottleneckDb;

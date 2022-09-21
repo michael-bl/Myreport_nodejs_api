@@ -1,4 +1,4 @@
-const CuelloBotellaDb = require('../model/model');
+const bottleneckDb = require('../model/model');
 
 // create and save new cb report
 exports.create = (req, res)=>{
@@ -8,10 +8,10 @@ exports.create = (req, res)=>{
         return;
     }
     //new cuellobotella
-    const newCbReport = new CuelloBotellaDb({
+    const newBottleneckRpt = new bottleneckDb({
         code:req.body.code,
         date:req.body.date,
-        dniEncargado:req.body.dniEncargado,
+        dniManager:req.body.dniManager,
         reason:req.body.reason,
         lot:req.body.lot,
         section:req.body.section,
@@ -20,10 +20,11 @@ exports.create = (req, res)=>{
     })
 
     // saving data in the db
-    newCbReport
-    .save()
+    newBottleneckRpt
+    .save(newBottleneckRpt)
     .then(data=>{
-        res.send(data)
+        //res.send(data)
+        res.redirect('/add-bottleneck')
     })
     .catch(err=>{
             res.status(500).send({message:err.message || "Some error ocurred while operation create!"});
@@ -33,13 +34,27 @@ exports.create = (req, res)=>{
 
 // retrive and return all cuellobotella/retrive and return a single report
 exports.find = (req, res)=>{
-    CuelloBotellaDb.find()
-    .then(cuellobotella=>{
-        res.send(cuellobotella)
+    if(req.query.code){
+        const code = req.params.code;
+        bottleneckDb.findOne(code,{_id:0})
+        .then(data=>{
+            if(!data){
+                res.status(404).send({message:`Not found report with id: ${code}`})
+            } else {
+                res.send(data)
+            }
+        }).catch(err=>{
+            res.status(500).send({message:`${err}, retrieving report with id: ${code}`})
+        })
+    } else {
+        bottleneckDb.find()
+    .then(bottlenecks=>{
+        res.send(bottlenecks)
     })
     .catch(err=>{
-        res.status(500).send({message:err.message || "Error ocurred while while retriving cuellobotella information!"});
+        res.status(500).send({message:err.message || "Error ocurred while while retriving bottlenecks information!"});
     })
+    }
 } 
 
 // update a new indentify report by cuellobotella id
@@ -54,16 +69,16 @@ exports.update = (req, res)=>{
     const dataTochange = req.body.reason;
 
     // {_id:0} esto indica que ignore este campo en la consulta
-    CuelloBotellaDb.updateOne({code: code}, {$set:{reason:dataTochange}}, {_id:0})
+    bottleneckDb.updateOne({code: code}, {$set:{reason:dataTochange}}, {_id:0})
     .then(data=>{
         if(!data){
-            res.status(400).send({message:`Can't update cuellobotella with ${code}. The report not found!`})
+            res.status(400).send({message:`Can't update bottleneck with ${code}. The report not found!`})
         } else {
             res.send(data)
         }
     })
     .catch(err=>{
-        res.status(500).send({message:"Error updating information, with code: " + err})
+        res.status(500).send({message: `Error updating information, with code: ${err}`})
     })
 }
 
@@ -71,10 +86,10 @@ exports.update = (req, res)=>{
 exports.delete=(req, res)=>{
     const code = req.params.code;
 
-    CuelloBotellaDb.findByIdAndDelete({code: code})
+    bottleneckDb.findOneAndDelete({code: code})
     .then(data=>{
         if(!data){
-            res.status(404).send({message:`Can't delete report with code ${code}. Maybe the code is wrong!`})
+            res.status(404).send({message:`Can't delete report with code ${code}!`})
         } else{
             res.send({
                 message:"Report was delete successfully!"
@@ -83,7 +98,6 @@ exports.delete=(req, res)=>{
     })
     .catch(err=>{
         res.status(500).send({
-            message:"Could't delete report with id=" + code + " and "+ err
-        })
+            message:`Could't delete report with id: ${code} => ${err}`})
     });
 }

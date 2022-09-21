@@ -13,18 +13,18 @@ route.get('/', services.homeRoutes);
  * @description For add new report cuello botella
  * @Method GET/add-cuellobotella
  */
-route.get('/add-cuellobotella',services.add_cuellobotella);
+route.get('/add-bottleneck',services.add_bottleneck);
 
 /**
  * @description For update report cuello botella
  * @Method GET/update-cuellobotella
  */
-route.get('/update-cuellobotella',services.update_cuellobotella);
+route.get('/update-bottleneck',services.update_bottleneck);
 
 // API
-route.post('/api/cuellosbotella', controller.create);
-route.get('/api/cuellosbotella', controller.find);
-route.put('/api/cuellosbotella/:code', controller.update);
-route.delete('/api/cuellosbotella/:code', controller.delete);
+route.post('/api/bottleneck', controller.create);
+route.get('/api/bottleneck', controller.find);
+route.put('/api/bottleneck/:code', controller.update);
+route.delete('/api/bottleneck/:code', controller.delete);
 
 module.exports = route

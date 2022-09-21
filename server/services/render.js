@@ -1,12 +1,22 @@
+const axios = require('axios');
 
 exports.homeRoutes = (req, res) =>{
-    res.render('index');
+    // Making a get request to /api/bottleneck
+    //axios.get('https://myreport-api-nodejs.herokuapp.com/api/bottleneck')
+    axios.get('http://localhost:3000/api/bottleneck')    
+    .then(function(response){
+        console.log(response)
+        res.render('index', {bottlenecks:response.data});
+    })
+    .catch(err=>{
+        res.send(err);
+    })   
 }
 
-exports.add_cuellobotella = (req, res) =>{
-    res.render('add_cuellobotella');
+exports.add_bottleneck = (req, res) =>{
+    res.render('add_bottleneck');
 }
 
-exports.update_cuellobotella = (req, res) =>{
-    res.render('update_cuellobotella');
+exports.update_bottleneck = (req, res) =>{
+    res.render('update_bottleneck');
 }
