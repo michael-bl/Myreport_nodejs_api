@@ -5,7 +5,6 @@ exports.homeRoutes = (req, res) =>{
     //axios.get('https://myreport-api-nodejs.herokuapp.com/api/bottleneck')
     axios.get('http://localhost:3000/api/bottleneck')    
     .then(function(response){
-        console.log(response)
         res.render('index', {bottlenecks:response.data});
     })
     .catch(err=>{
@@ -18,5 +17,11 @@ exports.add_bottleneck = (req, res) =>{
 }
 
 exports.update_bottleneck = (req, res) =>{
-    res.render('update_bottleneck');
+    axios.get('http://localhost:3000/api/bottleneck',{params:{code:req.query.code}})
+    .then(function(bottleneckdata){
+        res.render("update_bottleneck", {bottleneck:bottleneckdata.data})
+    })
+    .catch(err=>{
+        res.send(err);
+    })
 }
