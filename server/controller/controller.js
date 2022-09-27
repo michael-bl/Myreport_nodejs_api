@@ -4,10 +4,10 @@ const bottleneckDb = require('../model/model');
 exports.create = (req, res)=>{
     //validate request
     if(!req.body){
-        res.status(400).send({message:"Content can not by empty"})
+        res.status(400).send({message:"Content cann't by empty"})
         return;
     }
-    //new cuellobotella
+    //new bottleneck report
     const newBottleneckRpt = new bottleneckDb({
         code:req.body.code,
         date:req.body.date,
@@ -32,19 +32,18 @@ exports.create = (req, res)=>{
 
 }
 
-// retrive and return all cuellobotella/retrive and return a single report
+// retrive and return all bottleneck/retrive and return a single report
 exports.find = (req, res)=>{
     if(req.query.code){
-        const code = req.params.code;
-        bottleneckDb.findOne(code,{_id:0})
+        bottleneckDb.findOne(req.params.code,{_id:0})
         .then(data=>{
             if(!data){
-                res.status(404).send({message:`Not found report with id: ${code}`})
+                res.status(404).send({message:`Not found report with id: ${req.params.code}`})
             } else {
                 res.send(data)
             }
         }).catch(err=>{
-            res.status(500).send({message:`${err}, retrieving report with id: ${code}`})
+            res.status(500).send({message:`${err}, retrieving report with id: ${req.params.code}`})
         })
     } else {
         bottleneckDb.find()
@@ -57,22 +56,20 @@ exports.find = (req, res)=>{
     }
 } 
 
-// update a new indentify report by cuellobotella id
+// update a indentify report by bottleneck code
 exports.update = (req, res)=>{
     if(!req.body){
         return res
         .status(400)
         .send({message:"Data to update cant not by empty!"})
     }
-    
-    const code = req.params.code;
-    const dataTochange = req.body.reason;
 
     // {_id:0} esto indica que ignore este campo en la consulta
-    bottleneckDb.updateOne({code: code}, {$set:{reason:dataTochange}}, {_id:0})
+    // bottleneckDb.updateOne({code: code}, {$set:{reason:reasonData}, $set:{lot:lotData}, $set:{section:sectionData}, $set:{hourFinal:hourFinalData}})
+    bottleneckDb.updateOne({code: req.params.code}, {$set:{reason:req.body.reason, lot:req.body.lot, section:req.body.section, hourFinal:req.body.hourFinal}}, {_id:0})
     .then(data=>{
         if(!data){
-            res.status(400).send({message:`Can't update bottleneck with ${code}. The report not found!`})
+            res.status(400).send({message:`Can't update bottleneck with ${req.params.code}. The report not found!`})
         } else {
             res.send(data)
         }
@@ -82,14 +79,13 @@ exports.update = (req, res)=>{
     })
 }
 
-// delete a cuellobotella especified by id
+// delete a bottleneck especified by id
 exports.delete=(req, res)=>{
-    const code = req.params.code;
 
-    bottleneckDb.findOneAndDelete({code: code})
+    bottleneckDb.findOneAndDelete({code: req.params.code})
     .then(data=>{
         if(!data){
-            res.status(404).send({message:`Can't delete report with code ${code}!`})
+            res.status(404).send({message:`Can't delete report with code ${req.params.code}!`})
         } else{
             res.send({
                 message:"Report was delete successfully!"
@@ -98,6 +94,6 @@ exports.delete=(req, res)=>{
     })
     .catch(err=>{
         res.status(500).send({
-            message:`Could't delete report with id: ${code} => ${err}`})
+            message:`Could't delete report with id: ${req.params.code} => ${err}`})
     });
 }

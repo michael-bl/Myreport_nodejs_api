@@ -4,20 +4,20 @@ const services = require('../services/render');
 const controller = require('../controller/controller');
 
 /**
- * @description Root Route
+ * @description Root route
  * @Method GET/
  */
 route.get('/', services.homeRoutes);
 
 /**
- * @description For add new report cuello botella
- * @Method GET/add-cuellobotella
+ * @description For add new report bottleneck
+ * @Method GET/add-bottleneck
  */
 route.get('/add-bottleneck',services.add_bottleneck);
 
 /**
- * @description For update report cuello botella
- * @Method GET/update-cuellobotella
+ * @description For update report bottleneck
+ * @Method GET/update-bottleneck
  */
 route.get('/update-bottleneck',services.update_bottleneck);
 

@@ -9,12 +9,12 @@
     <td> <%=bottlenecks[i].hourBegin%> </td>
     <td> <%=bottlenecks[i].hourFinal%> </td>
     <td> 
-        <a href="update-bottleneck?code=<%=bottlenecks[i].code%>" class="btn border-shadow update">
+        <a href="/update-bottleneck?code=<%=bottlenecks[i].code%>" class="btn border-shadow update">
             <span class="text-gradient">
                 <i class="fas fa-pencil-alt"></i>
             </span>
         </a>
-        <a href="#" class="btn border-shadow delete">
+        <a href="#" class="btn border-shadow delete" data-code=<%=bottlenecks[i].code%>>
             <span class="text-gradient">
                 <i class="fas fa-times"></i>
             </span>
