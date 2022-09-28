@@ -35,15 +35,15 @@ exports.create = (req, res)=>{
 // retrive and return all bottleneck/retrive and return a single report
 exports.find = (req, res)=>{
     if(req.query.code){
-        bottleneckDb.findOne(req.params.code,{_id:0})
+        bottleneckDb.findOne({code:req.query.code}, {_id:0})
         .then(data=>{
             if(!data){
-                res.status(404).send({message:`Not found report with id: ${req.params.code}`})
+                res.status(404).send({message:`Not found report with id: ${req.query.code}`})
             } else {
                 res.send(data)
             }
         }).catch(err=>{
-            res.status(500).send({message:`${err}, retrieving report with id: ${req.params.code}`})
+            res.status(500).send({message:`${err}, retrieving report with id: ${req.query.code}`})
         })
     } else {
         bottleneckDb.find()
@@ -65,7 +65,6 @@ exports.update = (req, res)=>{
     }
 
     // {_id:0} esto indica que ignore este campo en la consulta
-    // bottleneckDb.updateOne({code: code}, {$set:{reason:reasonData}, $set:{lot:lotData}, $set:{section:sectionData}, $set:{hourFinal:hourFinalData}})
     bottleneckDb.updateOne({code: req.params.code}, {$set:{reason:req.body.reason, lot:req.body.lot, section:req.body.section, hourFinal:req.body.hourFinal}}, {_id:0})
     .then(data=>{
         if(!data){

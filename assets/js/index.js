@@ -14,13 +14,14 @@ $("#update_bottleneck").submit(function(event){
     console.log(data);
 
     var request = {
-        "url":`http://localhost:3000/api/bottleneck/${data.id}`,
+        "url":`http://localhost:3000/api/bottleneck/${data.code}`,
         "method":"PUT",
         "data":data
     }
 
     $.ajax(request).done(function(response){
         alert("Report updated successfully!");
+        location.reload()
     })    
 })
 
