@@ -18,7 +18,7 @@ a{
 }
 
 .container{
-    max-width: 1300px;
+    max-width: 70%;
     margin: auto;
 }
 
@@ -148,18 +148,18 @@ table{
 }
 
 .new_bottleneck{
-    max-width: 786px;
+    max-width: 60%;
     margin: auto;
 }
 
 #update_bottleneck .form-group,
 #add_bottleneck .form-group{
-    margin: .4em 0;
+    margin: .5em 0;
 }
 
-#add_bottleneck .form-group input[type="text"], 
-input[type="number"], input[type="time"], input[type="date"],
 #update_bottleneck .form-group input[type="text"], 
+input[type="number"], input[type="time"], input[type="date"],
+#add_bottleneck .form-group input[type="text"], 
 input[type="number"], input[type="time"], input[type="date"]{
     width: 100%;
     padding: .6em 1em;
