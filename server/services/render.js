@@ -16,8 +16,9 @@ exports.add_bottleneck = (req, res) => {
     res.render('add_bottleneck');
 }
 
+//axios.get('http://localhost:3000/api/bottleneck'
 exports.update_bottleneck = (req, res) => {
-    axios.get('http://localhost:3000/api/bottleneck', { params: { code: req.query.code } })
+    axios.get('myreport-api-nodejs.herokuapp.com/api/bottleneck', { params: { code: req.query.code } })
         .then(function (bottleneckdata) {
             res.render("update_bottleneck", { bottleneck: bottleneckdata.data })
         })
